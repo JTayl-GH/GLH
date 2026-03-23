@@ -1,138 +1,260 @@
 /* =========================
    RESET & BASE STYLES
    ========================= */
-
    * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     background-color: #ffffff;
-    color: #000000;
+    color: #333333;
     line-height: 1.6;
-    padding-top: 70px;
 }
 
 /* =========================
-   LINKS & BUTTONS
+   NAVIGATION BAR
    ========================= */
-
-a {
-    text-decoration: none;
-    color: #000000;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-button {
-    font-family: inherit;
-    background: none;
-    border: 1px solid #000000;
-    padding: 6px 12px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #000000;
-    color: #ffffff;
-}
-
-/* =========================
-   FIXED TOP NAVBAR
-   ========================= */
-
-   .navbar {
+.navbar {
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-    padding: 16px 32px;
+    padding: 12px 4%;
     background-color: #ffffff;
-    border-bottom: 1px solid #000000;
-
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     z-index: 1000;
 }
 
-
-/* Logo */
-.logo {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-/* Links container */
-.nav-links {
+/* Logo Section */
+.logo-container {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.logo-icon {
+    height: 45px;
+    width: auto;
+}
+
+.logo-title {
+    display: block;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #2e2e2e;
+}
+
+.logo-subtitle {
+    font-size: 0.85rem;
+    color: #666666;
+    display: block;
+}
+
+/* Links */
+.nav-links, .action-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-links a {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #444444;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #28a745;
+    text-decoration: none;
 }
 
 /* =========================
-   DROPDOWN
+   DROPDOWN & ACCESSIBILITY
    ========================= */
-
-.dropdown {
+.dropdown-menu {
     position: relative;
 }
 
-.dropdown-btn {
-    background: none;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 0;
+.dropdown-toggle {
+    font-size: 0.95rem;
+    color: #444;
 }
 
-/* Dropdown content */
-.dropdown-content {
+.dropdown-menu ul {
     display: none;
     position: absolute;
-    top: 110%;
     right: 0;
-    background-color: #ffffff;
-    border: 1px solid #000000;
-    min-width: 160px;
+    top: 100%;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    list-style: none;
+    min-width: 200px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 8px 0;
+    margin-top: 10px;
 }
 
-.dropdown-content a {
+.dropdown-menu:hover ul {
     display: block;
-    padding: 10px;
 }
 
-.dropdown-content a:hover {
-    background-color: #000000;
-    color: #ffffff;
-}
-
-/* Show dropdown on hover */
-.dropdown:hover .dropdown-content {
+.dropdown-menu li button, .dropdown-menu li a {
     display: block;
+    width: 100%;
+    padding: 10px 20px;
+    text-align: left;
+    background: none;
+    border: none;
+    font-size: 0.9rem;
+    color: #333;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.dropdown-menu li a:hover, .dropdown-menu li button:hover {
+    background-color: #f8f9fa;
+    color: #28a745;
 }
 
 /* =========================
-   PAGE LAYOUT
+   HERO SECTION
    ========================= */
-
-.container {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 20px;
+.hero {
+    height: 550px;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), 
+                url('/images/farmers-field.jpg') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    padding: 0 8%;
+    color: #000000;
+    margin-top: 60px;
 }
 
-h1, h2, h3 {
-    margin-bottom: 12px;
+.hero-content {
+    max-width: 650px;
 }
 
-p {
-    margin-bottom: 16px;
+.hero-content h1 {
+    font-size: 12;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.hero-content p {
+    font-size: 6;
+    margin-bottom: 32px;
+    opacity: 0.95;
+}
+
+/* Buttons */
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.btn-green, .btn-white {
+    padding: 13px 26px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: transform 0.2s, background 0.3s;
+    text-align: center;
+}
+
+.action-links a[href="/register"] {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+}
+
+.btn-green, .action-links a[href="/register"] {
+    background-color: #39ad48; /* Matching the wireframe green */
+    color: white !important;
+}
+
+.btn-green:hover, .action-links a[href="/register"]:hover {
+    background-color: #2d8a39;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+.btn-white {
+    background-color: #ffffff;
+    color: #333333 !important;
+}
+
+.btn-white:hover {
+    background-color: #f1f1f1;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+/* =========================
+   ABOUT SECTION (2-Column)
+   ========================= */
+.page-section {
+    padding: 100px 8%;
+}
+
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* Text gets more space than image */
+    gap: 80px;
+    align-items: center;
+}
+
+.text-column h2 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 24px;
+}
+
+.text-column p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.image-column {
+    position: relative;
+}
+
+.rounded-image {
+    width: 100%;
+    height: auto;
+    border-radius: 24px; /* Matches the rounded wireframe look */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+/* =========================
+   DARK MODE BASICS
+   ========================= */
+body.dark-mode {
+    background-color: #121212;
+    color: #f0f0f0;
+}
+
+body.dark-mode .navbar, body.dark-mode .dropdown-menu ul {
+    background-color: #1e1e1e;
+    border-color: #333;
+}
+
+body.dark-mode .nav-links a, body.dark-mode .logo-title {
+    color: #f0f0f0;
 }
