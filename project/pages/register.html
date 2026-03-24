@@ -20,9 +20,20 @@
         </a>
     
         <!-- Action Links -->
-        <div class="nav-links">
+        <div class="action-links">
+            <div class="dropdown-menu">
+                <a href="#" class="dropdown-toggle">Accessibility</a>
+                <ul>
+                    <li>
+                        <button id="darkmode-toggle">
+                            Dark Mode
+                        </button>
+                    </li>
 
-            <a href="/accessibility">Accessibility</a>
+                    <li><a href="#" onclick="increaseFontSize()">Text Size</a></li>
+                    <li><a href="#" onclick="toggleHighContrast()">High Contrast Mode</a></li>
+                </ul>
+            </div>
             <a href="/login">Sign In</a>
         </div>
     </nav>
