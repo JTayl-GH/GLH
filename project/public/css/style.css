@@ -161,6 +161,12 @@ body {
     opacity: 0.95;
 }
 
+.image-attribution {
+    padding-left: 750px;
+    padding-top: 400px;
+    color: #ffffff;
+}
+
 /* Buttons */
 .hero-buttons {
     display: flex;
