@@ -51,6 +51,7 @@ body {
     height: 45px; /* large icon to make sure user sees logo, adheres to fitt's law 
     for redirecting to homepage as target is large. adheres to jakob's law as logo is
     in a common spot */
+    border-radius: 12px;
     width: auto;
 }
 
@@ -339,16 +340,111 @@ body {
 }
 
 /* Dark Mode */
+
+/* Main Body & Layout */
 body.dark-mode {
     background-color: #121212;
     color: #f0f0f0;
 }
 
-body.dark-mode .navbar, body.dark-mode .dropdown-menu ul {
-    background-color: #1e1e1e;
-    border-color: #333;
+/* Header & Navigation */
+body.dark-mode .navbar, 
+body.dark-mode .dropdown-menu ul {
+    background-color: #1a1a1a; /* Deeper dark for nav */
+    border-bottom: 1px solid #333;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-body.dark-mode .nav-links a, body.dark-mode .logo-title {
+body.dark-mode .nav-links a, 
+body.dark-mode .logo-title,
+body.dark-mode .action-links a:not(.btn-green) {
+    color: #e0e0e0;
+}
+
+/* Hero Section Adjustments */
+
+body.dark-mode .hero {
+    /* Stronger overlay to ensure text pops against the image in dark mode */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), 
+                url('/images/farmers-field.jpg') no-repeat center center/cover;
+}
+
+body.dark-mode .hero-content {
+    color: rgb(207, 206, 206);
+}
+
+/* Content Sections */
+body.dark-mode .page-section {
+    background-color: #121212;
+}
+
+body.dark-mode h2, 
+body.dark-mode h3 {
+    color: #33b448; /* Brighter green for headings in dark mode */
+}
+
+body.dark-mode p {
+    color: #b0b0b0; /* Slightly dimmed text for better eye comfort */
+}
+
+/* Footer Styling */
+body.dark-mode .footer {
+    background-color: #0f0f0f; /* Blacker footer for depth */
+    border-top: 1px solid #222;
+}
+
+body.dark-mode .footer-columns h3 {
+    color: #33b448; /* matches colours with headings from navigation links,
+                        flows with rest of page */
+}
+
+body.dark-mode .footer-columns ul li a {
+    color: #999;
+}
+
+body.dark-mode .footer-columns ul li a:hover {
+    color: #ffffff;
+}
+
+/* Accessibility Dropdown Buttons */
+body.dark-mode .dropdown-menu button {
+    background: transparent;
+    color: #c9c9c9;
+    border: 1px solid #444;
+}
+
+body.dark-mode .dropdown-menu button:hover {
+    background: #696969;
+}
+
+body.dark-mode .dropdown-menu ul li:hover {
+    background-color: #333; /* Darker grey hover state */
+}
+
+/* Ensure the links inside the dropdown don't turn white/invisible */
+body.dark-mode .dropdown-menu ul li a {
+    display: block;
+    width: 100%;
     color: #f0f0f0;
+    padding: 8px 15px;
+    text-decoration: none;
+}
+
+body.dark-mode .dropdown-menu ul li a:hover {
+    background-color: #333;
+}
+
+/* Fix for the button specifically */
+body.dark-mode .dropdown-menu button {
+    width: 100%;
+    text-align: left;
+    padding: 8px 15px;
+    background: transparent;
+    color: #f0f0f0;
+    border: none; 
+    cursor: pointer;
+}
+
+body.dark-mode .dropdown-menu button:hover {
+    background-color: #333;
 }
