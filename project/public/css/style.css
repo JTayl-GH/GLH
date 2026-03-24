@@ -339,9 +339,11 @@ body {
     }
 }
 
+
 /* 
-   LOGIN PAGE SPECIFIC
+   LOGIN PAGE 
 */
+
 
 /* Background image for behind the form */
 .login-background {
@@ -442,6 +444,98 @@ body {
 .form-footer .btn-green:hover {
     background-color: #2d8a39;
 }
+
+/* 
+   REGISTRATION PAGE 
+ */
+
+   .register-background {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('/images/farmers-field.jpg') no-repeat center center/cover;
+    padding: 100px 20px 40px; /* Extra top padding for navbar spacing */
+}
+
+.register-card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 600px; /* Slightly wider than login to accommodate two columns */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.register-card h1 {
+    font-size: 2rem;
+    color: #222;
+    margin-bottom: 12px;
+}
+
+.register-card .subtitle {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Form Layout */
+.register-form {
+    text-align: left;
+}
+
+/* Side-by-side inputs for Name and Password confirmation */
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row .form-group {
+    flex: 1; /* Makes both inputs equal width */
+}
+
+.required { /* shows that details are required */
+    color: #d93025; /* Red color for the asterisks */
+}
+
+/* Checkbox alignment */
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.checkbox-group input {
+    width: auto;
+    margin-top: 5px;
+}
+
+.checkbox-group label {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* Footer ("Create Account" button)*/
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-footer p {
+    margin-top: 15px;
+    font-size: 0.9rem;
+}
+
+.form-footer a {
+    color: #39ad48;
+    font-weight: 600;
+    text-decoration: none;
+}
+
 
 /* Dark Mode */
 
@@ -576,6 +670,28 @@ body.dark-mode .form-group label {
 }
 
 body.dark-mode .form-group input {
+    background-color: #2d2d2d;
+    border-color: #444;
+    color: #fff;
+}
+
+
+/* Dark Mode REGISTER PAGE */
+body.dark-mode .register-card {
+    background-color: #1e1e1e;
+    color: #fff;
+}
+
+body.dark-mode .register-card h1,
+body.dark-mode .register-card .subtitle,
+body.dark-mode .register-form label {
+    color: #f0f0f0;
+}
+
+body.dark-mode .register-form input[type="text"],
+body.dark-mode .register-form input[type="email"],
+body.dark-mode .register-form input[type="password"],
+body.dark-mode .register-form input[type="tel"] {
     background-color: #2d2d2d;
     border-color: #444;
     color: #fff;
