@@ -1,6 +1,6 @@
-/* =========================
-   RESET & BASE STYLES
-   ========================= */
+/* Base 
+for all pages as a whole.
+*/
    * {
     margin: 0;
     padding: 0;
@@ -12,22 +12,23 @@ html {
 }
 
 body {
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif; /* common, accessible. easy to read fonts. */
     background-color: #ffffff;
     color: #333333;
     line-height: 1.6;
 }
 
-/* =========================
-   NAVIGATION BAR
-   ========================= */
+/* Navigation Bar
+ - Bar at top of each page of prototype that allows user to redirect to alternate pages.
+ allows for a smooth, quick experience. 
+*/
 .navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    display: flex;
+    display: flex; /* adapts padding of subtitle to title based on page */
     justify-content: space-between;
-    align-items: center;
+    align-items: center; /* makes all text centralised */
     padding: 12px 4%;
     background-color: #ffffff;
     box-shadow: 1px 5px 12px rgba(0, 0, 0, 0.05);
@@ -35,34 +36,41 @@ body {
     border-radius: 3px;
 }
 
-/* Logo Section */
+/* Logo Section 
+ - section for universal logo in top left, also configs main title and
+   subtitle to be bold and small to show full name and abbreviation 
+*/
 .logo-container {
     display: flex;
     align-items: center;
     gap: 12px;
-    text-decoration: none;
-    
+    text-decoration: none; /* removes text underlining for title and subtitle */
 }
 
 .logo-icon {
-    height: 45px;
+    height: 45px; /* large icon to make sure user sees logo, adheres to fitt's law 
+    for redirecting to homepage as target is large. adheres to jakob's law as logo is
+    in a common spot */
     width: auto;
 }
 
 .logo-title {
-    display: block;
-    font-weight: 700;
+    display: flex;
+    font-weight: 700; /* creates a bold look for title to show a clear display */
     font-size: 1.1rem;
-    color: #2e2e2e;
+    color: #2e2e2e; /* darker grey to show more emphasis in comparison to subtitle */
 }
 
 .logo-subtitle {
     font-size: 0.85rem;
-    color: #666666;
-    display: block;
+    color: #666666; /* lighter grey to show less emphasis compared to title */
+    display: flex; 
 }
 
-/* Links */
+/* Links 
+ - navigation links such as sign up and get started
+ - action links such as about and features
+ */
 .nav-links, .action-links {
     display: flex;
     align-items: center;
@@ -72,25 +80,25 @@ body {
 .nav-links a {
     font-size: 0.95rem;
     font-weight: 500;
-    color: #444444;
+    color: #444444; /* base colour for all navigation links */
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: #28a745;
-    text-decoration: none;
+    color: #28a745; /* link changes colour when hovered over by cursor to show user i can be clicked */
+    text-decoration: none; /* removes underline */
 }
 
-/* =========================
-   DROPDOWN & ACCESSIBILITY
-   ========================= */
+/* Accessibility dropdown
+ - quick accessibility toggle for common accessibility needs.
+ - on navigation bar. */
 .dropdown-menu {
-    position: relative;
+   position: relative; /* position of dropdown is relative to the size of the page */
 }
 
 .dropdown-toggle {
     font-size: 0.95rem;
-    color: #444;
+    color: #444; /* colour of text in dropdown same as action links. */
 }
 
 .dropdown-menu ul {
@@ -99,13 +107,13 @@ body {
     right: 0;
     top: 100%;
     background: white;
-    border: 1px solid #eee;
+    border: 1px solid #5c4f4f; /* dark border outline of menu to highlight the data inside the menu. */
     border-radius: 8px;
     list-style: none;
     min-width: 200px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     padding: 8px 0;
-    margin-top: 10px;
+    margin-top: 1px;
 }
 
 .dropdown-menu:hover ul {
@@ -130,17 +138,19 @@ body {
     color: #28a745;
 }
 
-/* =========================
-   HERO SECTION
-   ========================= */
+/* Hero Banner Section (Landing Page) 
+ - grabs the users attention, minimal options for both types of users (producers & customers).
+ - small description and large detailed image relative to the website.
+*/
 .hero {
     height: 550px;
     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), 
-                url('/images/farmers-field.jpg') no-repeat center center/cover;
+                url('/images/farmers-field.jpg') no-repeat center center/cover; /* centralises and covers
+                the page using the image without repeating the image (stretches and decreases height). */
     display: flex;
     align-items: center;
     padding: 0 8%;
-    color: #000000;
+    color: #000000; /* text colour */
     margin-top: 60px;
 }
 
@@ -162,7 +172,7 @@ body {
 }
 
 .image-attribution {
-    padding-left: 750px;
+    padding-left: 750px; /*  image by section - in bottom right corner of banner image */
     padding-top: 400px;
     color: #ffffff;
 }
@@ -173,7 +183,7 @@ body {
     gap: 16px;
 }
 
-.btn-green, .btn-white {
+.prod-register-button, .shop-button {
     padding: 13px 26px;
     border-radius: 8px;
     font-weight: 700;
@@ -184,41 +194,41 @@ body {
 
 .action-links a[href="/register"] {
     padding: 8px 16px;
-    font-size: 0.85rem;
+    font-size: 0.85rem;   /* changes the "get started" link specifically */
     border-radius: 8px;
 }
 
-.btn-green, .action-links a[href="/register"] {
-    background-color: #39ad48; /* Matching the wireframe green */
-    color: white !important;
+.prod-register-button, .action-links a[href="/register"] {
+    background-color: #39ad48; /* changes the register buttons for customers and producers to green matching the wireframe */
+    color: white ; /* contrasting text colours */
 }
 
-.btn-green:hover, .action-links a[href="/register"]:hover {
-    background-color: #2d8a39;
-    text-decoration: none;
+.prod-register-button:hover, .action-links a[href="/register"]:hover {
+    background-color: #2d8a39; /* darkens register colours when hovered over */
+    text-decoration: none; /* removes underlining from registering texting. */
     transform: translateY(-2px);
 }
 
-.btn-white {
+.shop-button {
     background-color: #ffffff;
-    color: #333333 !important;
+    color: #333333 ;
 }
 
-.btn-white:hover {
+.shop-button:hover {
     background-color: #f1f1f1;
     text-decoration: none;
     transform: translateY(-2px);
 }
 
-/* =========================
-   ABOUT SECTION (2-Column)
-   ========================= */
+/* About Sections 
+ - About, Features, How it Works
+*/
 .page-section {
     padding: 100px 8%;
 }
 
-.content-container {
-    max-width: 1200px;
+.information-container {
+    max-width: 1100px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1.2fr 1fr; /* Text gets more space than image */
@@ -251,11 +261,9 @@ body {
 }
 
 
-/* =========================
-   FOOTER STYLES
-   ========================= */
-   .site-footer {
-    background-color: #1a1a1a;
+/* Footer Style */
+   .footer {
+    background-color: #272525;
     color: #ffffff;
     padding: 60px 8% 20px;
     margin-top: 60px;
@@ -269,29 +277,29 @@ body {
     margin: 0 auto;
 }
 
-.footer-col h3 {
+.footer-columns h3 {
     font-size: 1.1rem;
     margin-bottom: 20px;
     color: #39ad48; /* Your brand green */
 }
 
-.footer-col ul {
+.footer-columns ul {
     list-style: none;
     padding: 0;
 }
 
-.footer-col ul li {
+.footer-columns ul li {
     margin-bottom: 12px;
 }
 
-.footer-col ul li a {
+.footer-columns ul li a {
     color: #cccccc;
     text-decoration: none;
     font-size: 0.95rem;
     transition: color 0.3s;
 }
 
-.footer-col ul li a:hover {
+.footer-columns ul li a:hover {
     color: #ffffff;
 }
 
@@ -314,7 +322,7 @@ body {
     color: #aaa;
 }
 
-.footer-bottom {
+.footer-end {
     border-top: 1px solid #333;
     margin-top: 50px;
     padding-top: 20px;
@@ -330,9 +338,7 @@ body {
     }
 }
 
-/* =========================
-   DARK MODE BASICS
-   ========================= */
+/* Dark Mode */
 body.dark-mode {
     background-color: #121212;
     color: #f0f0f0;
