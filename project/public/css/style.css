@@ -250,6 +250,86 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.12);
 }
 
+
+/* =========================
+   FOOTER STYLES
+   ========================= */
+   .site-footer {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    padding: 60px 8% 20px;
+    margin-top: 60px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-col h3 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #39ad48; /* Your brand green */
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul li a {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: #ffffff;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.footer-logo img {
+    height: 35px;
+    border-radius: 11px;
+}
+
+.contact-info {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.footer-bottom {
+    border-top: 1px solid #333;
+    margin-top: 50px;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #777;
+}
+
+/* Responsive adjustment for mobile */
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
 /* =========================
    DARK MODE BASICS
    ========================= */
