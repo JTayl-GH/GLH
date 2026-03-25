@@ -31,8 +31,12 @@ app.use(session({
 // Create Users table if not exists
 db.run(`CREATE TABLE IF NOT EXISTS users ( 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    firstName TEXT,
+    lastName TEXT,
     email TEXT UNIQUE,
-    password TEXT
+    password TEXT,
+    phone TEXT,
+    promo INTEGER
 )`); // Backticks allow for multi-line statements which reduces long lines, cleaner code for later developers.
 
 // static file
@@ -48,10 +52,10 @@ app.get("/contact", (req, res) => res.sendFile(path.join(__dirname, "./pages/con
 // Register user
 
 app.post("/register", async (req, res) => {
-    // get email and password from form
+    // get details from form
+    const { firstName, lastName, password, confirmPassword, phone, promo } = req.body;
+
     let email = req.body.email.toLowerCase(); // forces email body to be in lower case
-    const password = req.body.password;
-    const confirmPassword = req.body.confirmPassword;
 
     // server side validation of email format:
     if (!/^\S+@\S+\.\S+$/.test(email)) {  // !/^\S+@\S+\.\S+$/ tests email format (name@address.any)
@@ -68,9 +72,9 @@ app.post("/register", async (req, res) => {
 
     // insert in database
     db.run(
-        `INSERT INTO users (email, password) VALUES (?, ?)`, // SQL is case insensitive, used to make sql easier to detect and read.
+        `INSERT INTO users (firstName, lastName, email, password, phone, promo) VALUES (?, ?, ?, ?, ?, ?)`, // SQL is case insensitive, used to make sql easier to detect and read.
         // VALUES describes the actual data being put into the columns and the ? are placeholders.
-        [email, hash],
+        [firstName, lastName, email, hash, phone, promo ? 1 : 0],
         (err) => {
             if (err) return res.send("User already exists.")
                 res.redirect("/login"); // when successful, sends user to login
@@ -107,8 +111,18 @@ app.post("/login", async (req, res) => {
         if (!match) return res.send("Invalid password."); // compares password to inputted data and listens to encrypted password using bcrypt and validates if the password is correcto or not.
 
         req.session.userId = user.id;
+        req.session.firstName = user.firstName;
+
         res.redirect("/dashboard"); // redirects user to dashboard after session is connected to user account.
     });
+});
+
+app.get("/api/user-profile", (req, res) => {
+    if (req.session.userId) {
+        res.json({ firstName: req.session.firstName });
+    } else {
+        res.status(401).json({ error: "Not logged in" });
+    }
 });
 
 // Auth check middleware

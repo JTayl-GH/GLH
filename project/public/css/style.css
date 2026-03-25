@@ -263,7 +263,6 @@ body {
     background-color: #272525;
     color: #ffffff;
     padding: 60px 8% 20px;
-    margin-top: px;
 }
 
 .footer-container {
@@ -523,6 +522,80 @@ body {
     font-weight: 600;
     text-decoration: none;
 }
+
+/* Dashboard Page */
+
+/* Layout Wrapper */
+.dashboard-wrapper {
+    display: flex;
+    margin-top: 70px; /* Adjust based on your nav height */
+    min-height: calc(100vh - 70px);
+}
+
+/* Navigation Links (Top) */
+.nav-center {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #28a745; /* Greenfield Green */
+}
+
+/* Sidebar Styling */
+.dashboard-sidebar {
+    width: 260px;
+    background-color: #ffffff;
+    border-right: 1px solid #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-menu a {
+    display: block;
+    padding: 0.8rem 1rem;
+    text-decoration: none;
+    color: #555;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.sidebar-menu a:hover {
+    background-color: #f0fdf4; /* Very light green */
+    color: #28a745;
+}
+
+.sidebar-menu a.active {
+    background-color: #28a745;
+    color: #ffffff;
+}
+
+/* Main Content Adjustments */
+.dashboard-content {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 2.5rem;
+}
+
+
 
 /* Contact Page */
 
