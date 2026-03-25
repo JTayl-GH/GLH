@@ -35,12 +35,15 @@ db.run(`CREATE TABLE IF NOT EXISTS users (
     password TEXT
 )`); // Backticks allow for multi-line statements which reduces long lines, cleaner code for later developers.
 
+// static file
+app.use(express.static("public"));
+
 // Routes
 app.get("/", (req, res) => res.sendFile(path.join(__dirname, "./pages/home.html"))); //gets direct path of page, accesses page when request is sent and sends files to return full html interface.
 app.get("/login", (req, res) => res.sendFile(path.join(__dirname, "./pages/login.html")));
 app.get("/register", (req, res) => res.sendFile(path.join(__dirname, "./pages/register.html")));
 app.get("/forgot-password", (req, res) => res.sendFile(path.join(__dirname, "./pages/forgot-password.html")));
-app.get("/contact_us", (req, res) => res.sendFile(path.join(__dirname, "./pages/contact_us.html")));
+app.get("/contact", (req, res) => res.sendFile(path.join(__dirname, "./pages/contact.html")));
 
 // Register user
 
@@ -140,9 +143,6 @@ app.get("/dashboard", auth, (req, res) =>
 app.get("/logout", (req, res) => {
     req.session.destroy(() => res.redirect("/")); // destroys session (user being logged in) entirely and redirects user to homepage.
 });
-
-// static file must go last
-app.use(express.static("public"));
 
 // Start Server
 

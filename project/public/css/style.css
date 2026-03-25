@@ -250,10 +250,6 @@ body {
     margin-bottom: 20px;
 }
 
-.image-column {
-    position: relative;
-}
-
 .rounded-image {
     width: 100%;
     height: auto;
@@ -331,14 +327,6 @@ body {
     font-size: 0.85rem;
     color: #777;
 }
-
-/* Responsive adjustment for mobile */
-@media (max-width: 768px) {
-    .footer-container {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
 
 /* 
    LOGIN PAGE 
@@ -536,6 +524,88 @@ body {
     text-decoration: none;
 }
 
+/* Contact Page */
+
+.contact-page {
+    padding-top: 10px; 
+    padding-right: 45%;
+    min-height: 80vh;
+    display: block; /* forces cards into a set position */
+}
+
+.contact-page .information-container {
+    max-width: 1000px;
+    margin: 0; 
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start;
+    gap: 0px; 
+}
+
+.contact-header {
+    margin-bottom: 40px; 
+    width: 100%;
+    text-align: left;
+}
+
+.contact-header h1 {
+    color: #2e7d32;
+    font-size: 2.5rem;
+    margin: 0 0 10px 0;
+}
+
+.contact-header p {
+    color: #666;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.contact-grid {
+    display: flex; /* stacks below contact us header */
+    width: 100%;
+    padding-bottom: 40px;
+}
+
+/* The "Get in Touch" Card */
+
+.contact-card {
+    width: 100%;
+    max-width: none;
+    background: #ffffff;
+    border: 1px solid #e0e0e0; 
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.contact-card h3 {
+    color: #2e7d32;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.contact-details {
+    margin-top: 25px;
+    background: #f4f7f4;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #2e7d32;
+}
+
+/* Map Styles */
+
+.map-card {
+    width: 100%;
+    margin-top: 0px; 
+}
+
+.map-placeholder, .map-placeholder iframe {
+    min-height: 50vh;
+    width: 100%;
+    background: #eee;
+    border-radius: 11px;
+}
+
 
 /* Dark Mode */
 
@@ -695,4 +765,15 @@ body.dark-mode .register-form input[type="tel"] {
     background-color: #2d2d2d;
     border-color: #444;
     color: #fff;
+}
+
+/* Dark Mode CONTACT US */
+
+body.dark-mode .contact-card {
+    background-color: #19191a;
+    border-color: #3a3a3a;
+}
+
+body.dark-mode .contact-details {
+    background-color: #222;
 }
