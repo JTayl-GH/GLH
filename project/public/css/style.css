@@ -552,11 +552,12 @@ body {
 /* Sidebar Styling */
 .dashboard-sidebar {
     width: 260px;
-    background-color: #ffffff;
+    background-color: #f7f7f7;
     border-right: 1px solid #e0e0e0;
     display: flex;
     flex-direction: column;
-    padding: 2rem 1.5rem;
+    padding: 20px;
+    height: 100vh;
 }
 
 .sidebar-menu {
@@ -575,8 +576,14 @@ body {
     text-decoration: none;
     color: #555;
     border-radius: 8px;
-    transition: all 0.2s ease;
+    transition: 0.3s;
 }
+
+.sidebar-menu .logout-button {
+    background-color: red;
+    font-weight: 700;
+}
+
 
 .sidebar-menu a:hover {
     background-color: #f0fdf4; /* Very light green */
@@ -837,9 +844,28 @@ body.dark-mode .register-form input[type="password"],
 body.dark-mode .register-form input[type="tel"] {
     background-color: #2d2d2d;
     border-color: #444;
-    color: #fff;
+    color: d;
 }
 
+/* Dark Mode DASHBOARD */
+
+body.dark-mode .dashboard-wrapper {
+    background-color: #2d2d2d;
+}
+
+body.dark-mode .dashboard-content {
+    background-color: #2d2d2d;
+}
+
+body.dark-mode .dashboard-sidebar {
+    background-color: #201f1f;
+    border-color: #28a745;
+}
+
+body.dark-mode .sidebar-menu li a:hover {
+    color: #ebebeb;
+    background-color: #28a745;
+}
 /* Dark Mode CONTACT US */
 
 body.dark-mode .contact-card {

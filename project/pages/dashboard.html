@@ -42,7 +42,10 @@
                 </ul>
             </div>
 
-            <a href="/dashboard">My Account</a>
+            <span id="auth-links">
+                <a href="/login">Sign In</a>
+                <a href="/register">Get Started</a>
+            </span>
         </div>
     </nav>
     
@@ -52,9 +55,10 @@
                 <p>Welcome, <strong></strong> </p>
             </div>
             <ul class="sidebar-menu">
-                <li><a href="#overview" class="active">Overview</a></li>
+                <li><a href="#overview">Overview</a></li>
                 <li><a href="#orders">Order History</a></li>
                 <li><a href="#profile">Account Settings</a></li>
+                <li><a href="/logout" class="logout-button">Log out</a></li>
             </ul>
         </aside>
 
@@ -108,8 +112,8 @@
         </div>
     </footer>
 
-    <script src="/js/firstName-listener.js"></script>
-
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/auth.js"></script>
     <script src="/js/darkmode.js"></script>
 </body>
 </html>

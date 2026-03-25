@@ -22,3 +22,19 @@ document.addEventListener("DOMContentLoaded", () => {
             // Optional: window.location.href = "/login";
         });
 });
+
+// active sidebar link
+
+document.addEventListener("DOMContentLoaded", () => {
+    const menuItems = document.querySelectorAll('.sidebar-menu a');
+
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // 1. Remove 'active' class from all links
+            menuItems.forEach(link => link.classList.remove('active'));
+
+            // 2. Add 'active' class to the clicked link
+            this.classList.add('active');
+        });
+    });
+});
