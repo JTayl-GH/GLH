@@ -9,17 +9,17 @@ document.addEventListener("DOMContentLoaded", () => {
             return response.json();
         })
         .then(data => {
-            // 2. Find the <strong> tag inside the sidebar header
+            // Find the <strong> tag inside the sidebar header
             const welcomeElement = document.querySelector('.sidebar-header strong');
             
             if (welcomeElement && data.firstName) {
-                // 3. Update the text with the actual name from the database
+                // Updates welcome text with the actual name from the database
                 welcomeElement.textContent = data.firstName;
             }
         })
         .catch(err => {
             console.error("Dashboard Error:", err);
-            // Optional: window.location.href = "/login";
+            // If an error occurs console displays the error using "err" 
         });
 });
 
@@ -30,10 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     menuItems.forEach(item => {
         item.addEventListener('click', function() {
-            // 1. Remove 'active' class from all links
+            // Removes 'active' class from all links - smooth ui for side bar
             menuItems.forEach(link => link.classList.remove('active'));
 
-            // 2. Add 'active' class to the clicked link
+            // Add 'active' class to the clicked link to indicate which section is on in sidebar
             this.classList.add('active');
         });
     });

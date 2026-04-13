@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const authLinks = document.getElementById('auth-links');
             
             if (data.loggedIn && authLinks) {
-                // The user is logged in! 
-                // We replace "Sign In" and "Get Started" with "My Account" and "Logout"
+                // The user is logged in
+                // replaces "Sign In" and "Get Started" with "My Account"
                 authLinks.innerHTML = `
                     <a href="/dashboard">My Account</a>
                 `;
