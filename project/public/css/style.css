@@ -868,12 +868,11 @@ body.dark-mode .register-form input[type="tel"] {
 
 /* Dark Mode DASHBOARD */
 
-body.dark-mode .dashboard-wrapper {
-    background-color: #2d2d2d;
-}
-
+body.dark-mode, 
+body.dark-mode .dashboard-wrapper, 
 body.dark-mode .dashboard-content {
     background-color: #2d2d2d;
+    color: #ffffff;
 }
 
 body.dark-mode .dashboard-sidebar {
@@ -881,10 +880,23 @@ body.dark-mode .dashboard-sidebar {
     border-color: #28a745;
 }
 
+body.dark-mode .sidebar-menu li a {
+    color: #cecece;
+}
 body.dark-mode .sidebar-menu li a:hover {
-    color: #ebebeb;
+    color: #ffffff;
     background-color: #28a745;
 }
+
+body.dark-mode .content-card {
+    background-color: #2d2d2d;
+    border-color: #28a745;
+}
+
+body.dark-mode input {
+    background-color: #2d2d2d;
+}
+
 /* Dark Mode CONTACT US */
 
 body.dark-mode .contact-card {
