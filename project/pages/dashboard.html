@@ -56,18 +56,62 @@
             </div>
             <ul class="sidebar-menu">
                 <li><a href="#overview">Overview</a></li>
-                <li><a href="#orders">Order History</a></li>
                 <li><a href="#profile">Account Settings</a></li>
+                <li><a href="#orders">Order History</a></li>
                 <li><a href="/logout" class="logout-button">Log out</a></li> <!-- Allows user to logout 
                 from the account session from within the dashboard -->
             </ul>
         </aside>
 
         <main class="dashboard-content">
+            <section id="overview" class="content-card">
+                <h2 class="section-title">Welcome back, Jaden!</h2>
+                <p class="section-subtitle">Here is what's happening with your account today.</p>
 
+                <div class="stat-row">
+                    <div class="stat-item">
+                        <p class="label">Total Orders</p>
+                        <p class="value">12</p>
+                    </div>
+                    <div class="stat-item">
+                        <p class="label">Reward Points</p>
+                        <p class="value">450</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="profile" class="content-card">
+                <h2 class="section-title">Account Settings:</h2>
+                <p class="section-subtitle">Update your personal information.</p>
+
+                <form class="settings-form">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Change Password</label>
+                        <input type="password" id="password" placeholder="Leave blank to keep current">
+                    </div>
+                    <button type="submit" class="save-button">Update Profile</button>
+                </form>
+            </section> 
+            
+            <section id="orders" class="content-card">
+                <h2 class="section-title">Order History:</h2>
+            </section>
+            </div>
         </main>
     </div>
-
+            
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-columns">
