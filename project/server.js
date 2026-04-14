@@ -39,6 +39,28 @@ db.run(`CREATE TABLE IF NOT EXISTS users (
     promo INTEGER
 )`); // Backticks allow for multi-line statements which reduces long lines, cleaner code for later developers.
 
+// Create Products table (for producers adding products to marketplace)
+db.run(`CREATE TABLE IF NOT EXISTS products (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    description TEXT,
+    price REAL,
+    image_url TEXT,
+    producer_id INTEGER,
+    FOREIGN KEY(producer_id) REFERENCES users(id)
+)`);
+
+// Create Orders table (for customers who have ordered products)
+db.run(`CREATE TABLE IF NOT EXISTS orders (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    product_id INTEGER,
+    order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status TEXT DEFAULT 'Pending',
+    FOREIGN KEY(user_id) REFERENCES users(id),
+    FOREIGN KEY(product_id) REFERENCES products(id)
+)`);
+
 // static file
 app.use(express.static("public"));
 
@@ -159,11 +181,57 @@ app.get("/shop", (req, res) =>
 );
 
 
+// adding products to database (PRODUCER)
+app.post("/api/add-product", auth, (req, res) => {
+    const { name, description, price, image_url } = req.body;
+    const producerId = req.session.userId; // Assuming only producers use this
+
+    db.run(
+        `INSERT INTO products (name, description, price, image_url, producer_id) VALUES (?, ?, ?, ?, ?)`,
+        [name, description, price, image_url, producerId],
+        (err) => {
+            if (err) return res.status(500).send("Error adding product. Error:", err);
+            res.redirect("/shop"); 
+        }
+    );
+});
+
+// Buying/Ordering products from marketplace - then added to order database (CUSTOMER)
+app.post("/api/order", auth, (req, res) => {
+    const { productId } = req.body;
+    const userId = req.session.userId;
+
+    db.run(
+        `INSERT INTO orders (user_id, product_id) VALUES (?, ?)`,
+        [userId, productId],
+        (err) => {
+            if (err) return res.status(500).send("Order failed. Error:", err);
+            res.send("Order placed successfully!");
+        }
+    );
+});
+
+// Order history - Dashboard (CUSTOMER)
+app.get("/api/user-orders", auth, (req, res) => {
+    const userId = req.session.userId;
+    db.all(
+        `SELECT orders.*, products.name, products.price 
+         FROM orders 
+         JOIN products ON orders.product_id = products.id 
+         WHERE orders.user_id = ?`,
+        [userId],
+        (err, rows) => {
+            res.json(rows);
+        }
+    );
+});
+
 // Log out
 
 app.get("/logout", (req, res) => {
     req.session.destroy(() => res.redirect("/")); // destroys session (user being logged in) entirely and redirects user to homepage.
 });
+
 
 // Start Server
 
