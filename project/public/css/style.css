@@ -907,3 +907,7 @@ body.dark-mode .contact-card {
 body.dark-mode .contact-details {
     background-color: #222;
 }
+
+body.dark-mode .contact-page {
+    background-color: #131212;
+}
