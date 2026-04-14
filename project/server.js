@@ -152,6 +152,13 @@ app.get("/dashboard", auth, (req, res) =>
     res.sendFile(path.join(__dirname, "./pages/dashboard.html"))
 );
 
+// Shop Route
+
+app.get("/shop", (req, res) =>
+    res.sendFile(path.join(__dirname, "./pages/shop.html"))
+);
+
+
 // Log out
 
 app.get("/logout", (req, res) => {
