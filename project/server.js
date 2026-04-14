@@ -37,6 +37,7 @@ db.run(`CREATE TABLE IF NOT EXISTS users (
     password TEXT,
     phone TEXT,
     promo INTEGER
+    role TEXT DEFAULT 'customer' -- user type
 )`); // Backticks allow for multi-line statements which reduces long lines, cleaner code for later developers.
 
 // Create Products table (for producers adding products to marketplace)
@@ -75,7 +76,7 @@ app.get("/contact", (req, res) => res.sendFile(path.join(__dirname, "./pages/con
 
 app.post("/register", async (req, res) => {
     // get details from form
-    const { firstName, lastName, password, confirmPassword, phone, promo } = req.body;
+    const { firstName, lastName, password, confirmPassword, phone, promo, role } = req.body;
 
     let email = req.body.email.toLowerCase(); // forces email body to be in lower case
 
@@ -94,7 +95,7 @@ app.post("/register", async (req, res) => {
 
     // insert in database
     db.run(
-        `INSERT INTO users (firstName, lastName, email, password, phone, promo) VALUES (?, ?, ?, ?, ?, ?)`, // SQL is case insensitive, used to make sql easier to detect and read.
+        `INSERT INTO users (firstName, lastName, email, password, phone, promo, role) VALUES (?, ?, ?, ?, ?, ?, ?)`, // SQL is case insensitive, used to make sql easier to detect and read.
         // VALUES describes the actual data being put into the columns and the ? are placeholders.
         [firstName, lastName, email, hash, phone, promo ? 1 : 0],
         (err) => {
@@ -156,6 +157,25 @@ function auth(req, res, next) { // requests, responds and passes function
     next();
 }
 
+// Middleware to check if user is a Producer
+
+function isProducer(req, res, next) {
+    if (req.session.userId && req.session.role === 'producer') {
+        return next();
+    }
+    res.status(403).send("Access Denied: Producers only.");
+}
+
+// Update your Producer Dashboard route
+app.get("/producer-dashboard", auth, isProducer, (req, res) => {
+    res.sendFile(path.join(__dirname, "./pages/producer-dashboard.html"));
+});
+
+// Update the Add Product API to be Producer-only
+app.post("/api/add-product", auth, isProducer, (req, res) => {
+    //
+});
+
 
 // FORGOT PASSWORD
 
@@ -168,7 +188,7 @@ app.get("/auth-status", (req, res) => {
     res.json({ loggedIn: !!req.session.userId });
 });
 
-// Dashboards Route
+// Dashboard Route
 
 app.get("/dashboard", auth, (req, res) =>
     res.sendFile(path.join(__dirname, "./pages/dashboard.html"))
@@ -180,6 +200,10 @@ app.get("/shop", (req, res) =>
     res.sendFile(path.join(__dirname, "./pages/shop.html"))
 );
 
+// Producer Dashboard Route
+app.get("/producer-dashboard", auth, (req, res) => {
+    res.sendFile(path.join(__dirname, "./pages/producer-dashboard.html"));
+});
 
 // adding products to database (PRODUCER)
 app.post("/api/add-product", auth, (req, res) => {
