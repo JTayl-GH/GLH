@@ -31,13 +31,13 @@ app.use(session({
 // Create Users table if not exists
 db.run(`CREATE TABLE IF NOT EXISTS users ( 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role TEXT DEFAULT 'customer' -- user type,
     firstName TEXT,
     lastName TEXT,
     email TEXT UNIQUE,
     password TEXT,
     phone TEXT,
     promo INTEGER
-    role TEXT DEFAULT 'customer' -- user type
 )`); // Backticks allow for multi-line statements which reduces long lines, cleaner code for later developers.
 
 // Create Products table (for producers adding products to marketplace)
@@ -76,7 +76,7 @@ app.get("/contact", (req, res) => res.sendFile(path.join(__dirname, "./pages/con
 
 app.post("/register", async (req, res) => {
     // get details from form
-    const { firstName, lastName, password, confirmPassword, phone, promo, role } = req.body;
+    const {firstName, lastName, password, confirmPassword, phone, promo, role } = req.body;
 
     let email = req.body.email.toLowerCase(); // forces email body to be in lower case
 
@@ -97,7 +97,7 @@ app.post("/register", async (req, res) => {
     db.run(
         `INSERT INTO users (firstName, lastName, email, password, phone, promo, role) VALUES (?, ?, ?, ?, ?, ?, ?)`, // SQL is case insensitive, used to make sql easier to detect and read.
         // VALUES describes the actual data being put into the columns and the ? are placeholders.
-        [firstName, lastName, email, hash, phone, promo ? 1 : 0],
+        [ firstName, lastName, email, hash, phone, promo ? 1 : 0, role],
         (err) => {
             if (err) return res.send("User already exists.")
                 res.redirect("/login"); // when successful, sends user to login
@@ -128,15 +128,22 @@ app.post("/login", async (req, res) => {
 
     
     db.get(`SELECT * FROM users WHERE email = ?`, [email], async (err, user) => {
-        if (!user) return res.send("User not found."); // grabs username from database and validates if its inside the database or not to the user.
-
+        if (!user) return res.send("User not found.");
+    
         const match = await bcrypt.compare(password, user.password);
-        if (!match) return res.send("Invalid password."); // compares password to inputted data and listens to encrypted password using bcrypt and validates if the password is correcto or not.
-
+        if (!match) return res.send("Invalid password.");
+    
+        // Store the role in the session
         req.session.userId = user.id;
         req.session.firstName = user.firstName;
-
-        res.redirect("/dashboard"); // redirects user to dashboard after session is connected to user account.
+        req.session.role = user.role; // <-- Add this line
+    
+        // Redirect based on role
+        if (user.role === 'producer') {
+            res.redirect("/producer-dashboard");
+        } else {
+            res.redirect("/dashboard");
+        }
     });
 });
 
