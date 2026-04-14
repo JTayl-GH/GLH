@@ -446,6 +446,63 @@ body {
     padding: 100px 20px 40px; /* Extra top padding for navbar spacing */
 }
 
+/* Container for the whole toggle */
+.role-toggle-container {
+    display: flex;
+    position: relative;
+    background: #f1f1f1; /* Light grey background */
+    border-radius: 50px;
+    padding: 2px;
+    width: 100%;
+    max-width: 500px;
+    margin: 10px 0;
+    border: 1px solid #e0e0e0;
+}
+
+.role-toggle-container label {
+    padding-top: 12.5px;
+}
+
+/* Hide the actual radio dots */
+.role-toggle-container input[type="radio"] {
+    display: none;
+}
+
+/* The labels acting as buttons */
+.role-btn {
+    flex: 1;
+    text-align: center;
+    padding: 5px 0;
+    cursor: pointer;
+    z-index: 2;
+    font-weight: 500;
+    color: #666;
+    transition: color 0.3s ease;
+    border-radius: 30px;
+}
+
+/* The sliding white pill background */
+.toggle-slider {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    background: #ffffff;
+    border-radius: 40px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+}
+
+/* Logic: Move the white pill and change text color based on selection */
+#customer:checked ~ .toggle-slider {
+    left: 4px;
+}
+
+#producer:checked ~ .toggle-slider {
+    left: calc(50%);
+}
+
 .register-card {
     background-color: #ffffff;
     padding: 40px;
@@ -523,7 +580,7 @@ body {
     text-decoration: none;
 }
 
-/* Dashboard Page */
+/* Dashboard / Producer Dashboard Page */
 
 /* Layout Wrapper */
 .dashboard-wrapper {
@@ -687,6 +744,7 @@ body {
 }
 
 /* Dashboard */
+
 .dashboard-content {
     flex: 1;
     padding: 30px;
@@ -695,6 +753,7 @@ body {
 }
 
 /* The Dashboard Box (Card) */
+
 .content-card {
     background-color: #ffffff;
     border-radius: 12px;
@@ -707,6 +766,7 @@ body {
 }
 
 /* SHOP PAGE */
+
 .shop-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

@@ -12,50 +12,97 @@
         <a href="/" class="logo-container">
             <img src="/images/glh-logo.png" alt="Logo" class="logo-icon">
             <span class="logo-title">Greenfield Local Hub</span>
+
         </a>
+
+         <!-- Navigation Links-->
+
+         <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/shop">Shop</a>
+        </div>
+
+
         <div class="nav-links">
-            <a href="/dashboard">Customer View</a>
+            <a href="/producer-dashboard">Producer Home</a>
             <a href="/logout">Logout</a>
         </div>
     </nav>
 
-    <main class="page-section">
-        <div class="information-container">
-            <div class="text-column">
-                <h1>Producer Portal</h1>
-                <p>List a new product to the digital marketplace below.</p>
-                
-                <form action="/api/add-product" method="POST" class="auth-form">
-                    <div class="form-group">
-                        <label>Product Name</label>
-                        <input type="text" name="name" placeholder="e.g. Organic Carrots" required>
-                    </div>
+    <div class="dashboard-wrapper">
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <p>Welcome, <strong></strong> </p> <!-- uses strong to identify firstName and make it bold -->
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#profile">Account Settings</a></li>
+                <li><a href="#listing">Add New Product</a></li>
+                <li><a href="/logout" class="logout-button">Log out</a></li> <!-- Allows user to logout 
+                from the account session from within the dashboard -->
+            </ul>
+        </aside>
 
-                    <div class="form-group">
-                        <label>Description</label>
-                        <textarea name="description" placeholder="Describe your product..." required></textarea>
-                    </div>
+        <main>
+            <section id="profile" class="content-card">
+                <h2 class="section-title">Account Settings:</h2>
+                <p class="section-subtitle">Update your personal information.</p>
 
+                <form class="settings-form">
                     <div class="form-group">
-                        <label>Price (£)</label>
-                        <input type="number" name="price" step="0.01" placeholder="0.00" required>
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName">
                     </div>
-
                     <div class="form-group">
-                        <label>Image URL</label>
-                        <input type="text" name="image_url" placeholder="Paste an image link here">
-                        <small>Tip: Use a URL from Unsplash or a local path like /images/carrots.jpg</small>
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName">
                     </div>
-
-                    <button type="submit" class="shop-button">Add to Marketplace</button>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Change Password</label>
+                        <input type="password" id="password" placeholder="Leave blank to keep current">
+                    </div>
+                    <button type="submit" class="save-button">Update Profile</button>
                 </form>
-            </div>
-
-            <div class="image-column">
-                <img src="/images/glh-logo.png" alt="Producer Hub" class="rounded-image" style="background: #f9f9f9; padding: 50px;">
-            </div>
-        </div>
-    </main>
+            </section> 
+            
+            <section id="listing" class="content-card">
+                <div class="information-container">
+                    <div class="text-column">
+                        <h1>Producer Portal</h1>
+                        <p>List a new product to the digital marketplace below.</p>
+                        
+                        <form action="/api/add-product" method="POST" class="auth-form">
+                            <div class="form-group">
+                                <label>Product Name</label>
+                                <input type="text" name="name" placeholder="e.g. Organic Carrots" required>
+                            </div>
+        
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea name="description" placeholder="Describe your product..." required></textarea>
+                            </div>
+        
+                            <div class="form-group">
+                                <label>Price (£)</label>
+                                <input type="number" name="price" step="0.01" placeholder="0.00" required>
+                            </div>
+        
+                            <div class="form-group">
+                                <label>Image URL</label>
+                                <input type="text" name="image_url" placeholder="Paste an image link here">
+                                <small>Tip: Use a URL from Unsplash or a local path like /images/carrots.jpg</small>
+                            </div>
+        
+                            <button type="submit" class="shop-button">Add to Marketplace</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <footer class="footer">
         <div class="footer-container">
@@ -102,6 +149,7 @@
         </div>
     </footer>
 
+    <script src="/js/dashboard.js"></script>
     <script src="/js/auth.js"></script>
     <script src="/js/darkmode.js"></script>
 </body>

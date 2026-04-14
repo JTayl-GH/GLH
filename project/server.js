@@ -31,7 +31,7 @@ app.use(session({
 // Create Users table if not exists
 db.run(`CREATE TABLE IF NOT EXISTS users ( 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    role TEXT DEFAULT 'customer' -- user type,
+    role TEXT DEFAULT 'customer',
     firstName TEXT,
     lastName TEXT,
     email TEXT UNIQUE,
@@ -168,12 +168,13 @@ function auth(req, res, next) { // requests, responds and passes function
 
 function isProducer(req, res, next) {
     if (req.session.userId && req.session.role === 'producer') {
-        return next();
+            next();
+    } else {
+        res.status(403).send("Access Denied: Producers only.");
     }
-    res.status(403).send("Access Denied: Producers only.");
 }
 
-// Update your Producer Dashboard route
+// Producer Dashboard route - authenticates and checks role
 app.get("/producer-dashboard", auth, isProducer, (req, res) => {
     res.sendFile(path.join(__dirname, "./pages/producer-dashboard.html"));
 });
@@ -192,7 +193,9 @@ db.run(`ALTER TABLE users ADD COLUMN resetTokenExpiry INTEGER`, () => {}); // ex
 
 app.get("/auth-status", (req, res) => {
     console.log("auth-status requested, session:", req.session);
-    res.json({ loggedIn: !!req.session.userId });
+    res.json({ loggedIn: !!req.session.userId,
+        role: req.session.role
+     });
 });
 
 // Dashboard Route

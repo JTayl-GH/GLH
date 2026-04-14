@@ -49,11 +49,16 @@
             <form action="/register" method="POST" class="register-form">
                 
                 <div class="form-group">
-                    <label for="role">Account Type <span class="required">*</span></label>
-                    <select id="role" name="role" required>
-                        <option value="customer">Customer</option>
-                        <option value="producer">Producer</option>
-                    </select>
+                    <label>Account Type <span class="required">*</span></label>
+                    <div class="role-toggle-container">
+                        <input type="radio" id="customer" name="role" value="customer" checked>
+                        <label for="customer" class="role-btn">Customer</label>
+                
+                        <input type="radio" id="producer" name="role" value="producer">
+                        <label for="producer" class="role-btn">Producer</label>
+                        
+                        <div class="toggle-slider"></div>
+                    </div>
                 </div>
 
                 <div class="form-row">
