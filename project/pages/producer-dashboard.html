@@ -24,8 +24,20 @@
 
 
         <div class="nav-links">
+            <div class="dropdown-menu">
+                <a href="#" class="dropdown-toggle">Accessibility</a>
+                <ul>
+                    <li>
+                        <button id="darkmode-toggle">
+                            Dark Mode
+                        </button>
+                    </li>
+
+                    <li><a href="#" onclick="increaseFontSize()">Text Size</a></li>
+                    <li><a href="#" onclick="toggleHighContrast()">High Contrast Mode</a></li>
+                </ul>
+            </div>
             <a href="/producer-dashboard">Producer Home</a>
-            <a href="/logout">Logout</a>
         </div>
     </nav>
 
@@ -121,7 +133,7 @@
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#how-it-works">How it Works</a></li>
-                    <li><a href="/producer_register">For Producers</a></li>
+                    <li><a href="/register">For Producers</a></li>
                 </ul>
             </div>
     
