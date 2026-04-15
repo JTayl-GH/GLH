@@ -1,94 +1,60 @@
 async function loadProducts() {
+    const container = document.getElementById('product-list');
+    if (!container) return;
+
+    // 1. Define your original sample products
+    const sampleProducts = [
+        { id: 's1', name: "Organic Carrots", price: 2.50, image_url: "/images/carrot-background.jpg", description: "Fresh from Sunny Farms" },
+        { id: 's2', name: "Fresh Farm Eggs", price: 3.00, image_url: "/images/chicken-eggs.jpg", description: "Green Pastures Grade A" },
+        { id: 's3', name: "Local Honey", price: 5.50, image_url: "/images/jar-honey.jpg", description: "Pure Busy Bees nectar" }
+    ];
+
     try {
         const response = await fetch('/api/products');
-        const products = await response.json();
-        const container = document.getElementById('product-list');
+        const dbProducts = await response.json();
 
-        if (!container) return; // Safety check
+        // 2. Combine samples with database products
+        // This puts your examples first, then adds the new ones from the database
+        const allProducts = [...sampleProducts, ...dbProducts];
 
-        if (products.length === 0) {
-            container.innerHTML = "<p class='no-products'>No products available yet.</p>";
-            return;
-        }
-
-        // Generate the HTML for each product
-        container.innerHTML = products.map(p => `
+        // 3. Render everything at once
+        container.innerHTML = allProducts.map(p => `
             <div class="product-card">
-                <img src="${p.image_url || '/images/placeholder.jpg'}" alt="${p.name}" class="rounded-image">
+                <img src="${p.image_url || '/images/placeholder.jpg'}" alt="${p.name}" class="product-image">
                 <div class="product-info">
                     <h3>${p.name}</h3>
-                    <p>${p.description}</p>
-                    <p class="price"><strong>£${p.price.toFixed(2)}</strong></p>
-                    <button class="shop-button" onclick="orderProduct(${p.id})">Order Now</button>
+                    <p>${p.description || 'Local produce'}</p>
+                    <p class="price"><strong>£${typeof p.price === 'number' ? p.price.toFixed(2) : p.price}</strong></p>
+                    <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
                 </div>
             </div>
         `).join('');
+
     } catch (error) {
-        console.error("Error loading products:", error);
-    }
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    const productList = document.getElementById("product-list");
-
-    const sampleProducts = [
-        {
-            name: "Organic Carrots",
-            price: "£2.50",
-            image: "/images/carrot-background.jpg",
-            producer: "Sunny Farms"
-        },
-        {
-            name: "Fresh Farm Eggs",
-            price: "£3.00",
-            image: "/images/chicken-eggs.jpg",
-            producer: "Green Pastures"
-        },
-        {
-            name: "Local Honey",
-            price: "£5.50",
-            image: "/images/jar-honey.jpg",
-            producer: "Busy Bees"
+         console.error("Error loading products:", error);
         }
-    ];
+    }
 
-    sampleProducts.forEach(product => {
-        const productCard = document.createElement("div");
-        productCard.classList.add("product-card");
-
-        productCard.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" class="product-image">
-            <div class="product-info">
-                <h3>${product.name}</h3>
-                <p>By ${product.producer}</p>
-                <div class="product-price">${product.price}</div>
-                <button class="add-btn">Add to Cart</button>
-            </div>
-        `;
-
-        productList.appendChild(productCard);
-    });
-});
-
-async function orderProduct(productId) {
-    try {
-        const res = await fetch('/api/order', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ productId })
-        });
-
-        if (res.ok) {
-            alert("Order placed! Check your dashboard for history.");
+    function addToCart(id, name, price) {
+        // 1. Get existing cart from storage or start empty
+        let cart = JSON.parse(localStorage.getItem('glh_cart')) || [];
+    
+        // 2. Check if item is already in cart
+        const existingItem = cart.find(item => item.id === id);
+    
+        if (existingItem) {
+            existingItem.quantity += 1;
         } else {
-            // This happens if the user isn't logged in (auth middleware fails)
-            alert("Please log in to place an order.");
-            window.location.href = "/login";
+            cart.push({ id, name, price, quantity: 1 });
         }
-    } catch (error) {
-        alert("Something went wrong. Error:", error);
+    
+        // 3. Save back to localStorage
+        localStorage.setItem('glh_cart', JSON.stringify(cart));
+    
+        // 4. Feedback to user
+        alert(`${name} added to cart!`);
+        updateCartCount(); // Optional: update a number in your navbar
     }
-}
 
-// as soon as window loads, run function.
-window.onload = loadProducts;
+// Use ONE event listener to start the process
+document.addEventListener("DOMContentLoaded", loadProducts);

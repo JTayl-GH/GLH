@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="/images/glh-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo-container">
+            <img src="/images/glh-logo.png" alt="Logo" class="logo-icon">
+            <span class="logo-title">Greenfield Local Hub</span>
+
+        </a>
+
+
+        <div class="nav-links">
+            <div class="dropdown-menu">
+                <a href="#" class="dropdown-toggle">Accessibility</a>
+                <ul>
+                    <li>
+                        <button id="darkmode-toggle">
+                            Dark Mode
+                        </button>
+                    </li>
+
+                    <li><a href="#" onclick="increaseFontSize()">Text Size</a></li>
+                    <li><a href="#" onclick="toggleHighContrast()">High Contrast Mode</a></li>
+                </ul>
+            </div>
+            <a href="/shop">Back to Shop</a>
+        </div>
+    </nav>
+
+    <main class="page-section">
+        <div class="information-container">
+            <h1>Your Shopping Cart</h1>
+            <div id="cart-items" class="cart-list">
+                </div>
+            
+            <div class="cart-summary">
+                <h3>Total: £<span id="cart-total">0.00</span></h3>
+                <button id="checkout-btn" class="shop-button">Purchase Items</button>
+                <button onclick="clearCart()" class="clear-btn">Empty Cart</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-columns">
+                <div class="footer-logo">
+                    <img src="/images/glh-logo.png" alt="GLH Logo">
+                    <span>Greenfield Local Hub</span>
+                </div>
+                <p>Connecting local producers with the community.</p>
+                <p class="contact-info">Call Us: +44 123 456 7890</p>
+            </div>
+    
+            <div class="footer-columns">
+                <h3>Platform</h3>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How it Works</a></li>
+                    <li><a href="/register">For Producers</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-columns">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="/contact">Contact Us</a></li>
+                    <li><a href="/accessibility">Accessibility</a></li>
+                    <li><a href="/faq">FAQs</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-columns">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Use</a></li>
+                    <li><a href="/cookies">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="footer-end">
+            <p>&copy; 2026 Greenfield Local Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/js/cart.js"></script>
+    <script src="/js/darkmode.js"></script>
+    <script src="/js/auth.js"></script>
+</body>
+</html>

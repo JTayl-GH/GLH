@@ -174,17 +174,6 @@ function isProducer(req, res, next) {
     }
 }
 
-// Producer Dashboard route - authenticates and checks role
-app.get("/producer-dashboard", auth, isProducer, (req, res) => {
-    res.sendFile(path.join(__dirname, "./pages/producer-dashboard.html"));
-});
-
-// Update the Add Product API to be Producer-only
-app.post("/api/add-product", auth, isProducer, (req, res) => {
-    //
-});
-
-
 // FORGOT PASSWORD
 
 db.run(`ALTER TABLE users ADD COLUMN resetToken TEXT`, () => {});  // reset token is created
@@ -211,21 +200,39 @@ app.get("/shop", (req, res) =>
 );
 
 // Producer Dashboard Route
-app.get("/producer-dashboard", auth, (req, res) => {
+app.get("/producer-dashboard", auth, isProducer, (req, res) => {
     res.sendFile(path.join(__dirname, "./pages/producer-dashboard.html"));
+});
+
+// Cart Route
+
+app.get("/cart", (req, res) =>
+    res.sendFile(path.join(__dirname, "./pages/cart.html"))
+);
+
+// getting products for the marketplace
+app.get("/api/products", (req, res) => {
+    db.all("SELECT * FROM products", [], (err, rows) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(rows);
+    });
 });
 
 // adding products to database (PRODUCER)
 app.post("/api/add-product", auth, (req, res) => {
     const { name, description, price, image_url } = req.body;
-    const producerId = req.session.userId; // Assuming only producers use this
+    const producerId = req.session.userId; // as only producers can access this page.
 
     db.run(
         `INSERT INTO products (name, description, price, image_url, producer_id) VALUES (?, ?, ?, ?, ?)`,
         [name, description, price, image_url, producerId],
         (err) => {
-            if (err) return res.status(500).send("Error adding product. Error:", err);
-            res.redirect("/shop"); 
+            if (err) {
+                console.error("database error:", err.message);
+                return res.status(500).send("Error adding product. Error:", err);
+            }
+
+            res.redirect("/producer-dashboard"); 
         }
     );
 });
