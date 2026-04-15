@@ -28,6 +28,48 @@ async function loadProducts() {
     }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    const productList = document.getElementById("product-list");
+
+    const sampleProducts = [
+        {
+            name: "Organic Carrots",
+            price: "£2.50",
+            image: "/images/carrot-background.jpg",
+            producer: "Sunny Farms"
+        },
+        {
+            name: "Fresh Farm Eggs",
+            price: "£3.00",
+            image: "/images/chicken-eggs.jpg",
+            producer: "Green Pastures"
+        },
+        {
+            name: "Local Honey",
+            price: "£5.50",
+            image: "/images/jar-honey.jpg",
+            producer: "Busy Bees"
+        }
+    ];
+
+    sampleProducts.forEach(product => {
+        const productCard = document.createElement("div");
+        productCard.classList.add("product-card");
+
+        productCard.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" class="product-image">
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <p>By ${product.producer}</p>
+                <div class="product-price">${product.price}</div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+        `;
+
+        productList.appendChild(productCard);
+    });
+});
+
 async function orderProduct(productId) {
     try {
         const res = await fetch('/api/order', {
